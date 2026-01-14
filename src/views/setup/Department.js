@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
   CCard,
   CCardHeader,
@@ -10,14 +10,14 @@ import {
   CFormInput,
   CFormSelect,
   CFormTextarea,
+  CInputGroup,
+  CInputGroupText,
   CTable,
   CTableHead,
   CTableRow,
   CTableHeaderCell,
   CTableBody,
   CTableDataCell,
-  CInputGroup,
-  CInputGroupText,
   CPagination,
   CPaginationItem,
   CSpinner,
@@ -40,26 +40,24 @@ const initialForm = {
 
 const Department = () => {
   const [isEdit, setIsEdit] = useState(false)
-  const [selectedCode, setSelectedCode] = useState('MCA')
+  const [selectedCode, setSelectedCode] = useState(null)
   const [search, setSearch] = useState('')
   const [form, setForm] = useState(initialForm)
 
-  // Table UX state
+  // Sorting
   const [sort, setSort] = useState({ key: 'deptCode', dir: 'asc' })
+
+  // Pagination
   const [page, setPage] = useState(1) // 1-based
   const [pageSize, setPageSize] = useState(10)
+
+  // Loading placeholder (replace with API later)
   const [loading] = useState(false)
 
+  // Upload ref
   const fileRef = useRef(null)
 
-  const years = useMemo(() => {
-    const current = new Date().getFullYear()
-    const arr = []
-    for (let y = 2000; y <= current; y++) arr.push(String(y))
-    return arr
-  }, [])
-
-  // Sample data (replace with API later)
+  // Demo rows (replace with API later)
   const [rows] = useState([
     {
       deptCode: 'MCA',
@@ -83,7 +81,14 @@ const Department = () => {
     },
   ])
 
-  // Filter + Sort + Pagination
+  // Years dropdown
+  const years = useMemo(() => {
+    const current = new Date().getFullYear()
+    const arr = []
+    for (let y = 2000; y <= current; y++) arr.push(String(y))
+    return arr
+  }, [])
+
   const normalize = (v) =>
     String(v ?? '')
       .toLowerCase()
@@ -106,10 +111,7 @@ const Department = () => {
     let data = rows
 
     if (q) {
-      data = rows.filter((r) => {
-        const hay = Object.values(r).map(normalize).join(' ')
-        return hay.includes(q)
-      })
+      data = rows.filter((r) => Object.values(r).map(normalize).join(' ').includes(q))
     }
 
     const { key, dir } = sort || {}
@@ -166,25 +168,28 @@ const Department = () => {
 
   const onSave = (e) => {
     e.preventDefault()
+    // Hook your API save here
     setIsEdit(false)
   }
 
-  // Upload handling
+  // Upload / Download
   const onUploadClick = () => fileRef.current?.click()
   const onFileChange = (e) => {
     const file = e.target.files?.[0]
     if (!file) return
+    // Hook your upload handler here
     e.target.value = ''
   }
 
   const onDownloadTemplate = () => {
+    // Adjust template path if needed
     window.open('/templates/ARP_T01_Dept_Data_Template.xlsx', '_blank')
   }
 
   return (
     <CRow>
       <CCol xs={12}>
-        {/* TOP HEADER: Department Setup + Add/Upload/Download */}
+        {/* ================= HEADER ACTION CARD ================= */}
         <CCard className="mb-3">
           <CCardHeader className="d-flex justify-content-between align-items-center">
             <strong>DEPARTMENT SETUP</strong>
@@ -192,12 +197,7 @@ const Department = () => {
             <div className="d-flex gap-2">
               <ArpButton label="Add New" icon="add" color="purple" onClick={onAddNew} />
 
-              <input
-                ref={fileRef}
-                type="file"
-                style={{ display: 'none' }}
-                onChange={onFileChange}
-              />
+              <input ref={fileRef} type="file" style={{ display: 'none' }} onChange={onFileChange} />
 
               <ArpButton label="Upload" icon="upload" color="info" onClick={onUploadClick} />
               <ArpButton
@@ -210,7 +210,7 @@ const Department = () => {
           </CCardHeader>
         </CCard>
 
-        {/* ✅ Department Configuration (FORM) */}
+        {/* ================= FORM CARD ================= */}
         <CCard className="mb-3">
           <CCardHeader>
             <strong>Department Configuration</strong>
@@ -224,22 +224,14 @@ const Department = () => {
                   <CFormLabel>Department Code</CFormLabel>
                 </CCol>
                 <CCol md={3}>
-                  <CFormInput
-                    value={form.deptCode}
-                    onChange={onChange('deptCode')}
-                    disabled={!isEdit}
-                  />
+                  <CFormInput value={form.deptCode} onChange={onChange('deptCode')} disabled={!isEdit} />
                 </CCol>
 
                 <CCol md={3}>
                   <CFormLabel>Department Name</CFormLabel>
                 </CCol>
                 <CCol md={3}>
-                  <CFormInput
-                    value={form.deptName}
-                    onChange={onChange('deptName')}
-                    disabled={!isEdit}
-                  />
+                  <CFormInput value={form.deptName} onChange={onChange('deptName')} disabled={!isEdit} />
                 </CCol>
 
                 {/* Row 2 */}
@@ -247,11 +239,7 @@ const Department = () => {
                   <CFormLabel>Year of Establishment</CFormLabel>
                 </CCol>
                 <CCol md={3}>
-                  <CFormSelect
-                    value={form.estYear}
-                    onChange={onChange('estYear')}
-                    disabled={!isEdit}
-                  >
+                  <CFormSelect value={form.estYear} onChange={onChange('estYear')} disabled={!isEdit}>
                     <option value="">Select</option>
                     {years.map((y) => (
                       <option key={y} value={y}>
@@ -293,12 +281,7 @@ const Department = () => {
                   <CFormLabel>Vision</CFormLabel>
                 </CCol>
                 <CCol md={3}>
-                  <CFormTextarea
-                    value={form.vision}
-                    onChange={onChange('vision')}
-                    rows={5}
-                    disabled={!isEdit}
-                  />
+                  <CFormTextarea value={form.vision} onChange={onChange('vision')} rows={5} disabled={!isEdit} />
                 </CCol>
 
                 {/* Row 4 */}
@@ -306,77 +289,34 @@ const Department = () => {
                   <CFormLabel>Mission</CFormLabel>
                 </CCol>
                 <CCol md={3}>
-                  <CFormTextarea
-                    value={form.mission}
-                    onChange={onChange('mission')}
-                    rows={5}
-                    disabled={!isEdit}
-                  />
+                  <CFormTextarea value={form.mission} onChange={onChange('mission')} rows={5} disabled={!isEdit} />
                 </CCol>
 
                 <CCol md={3}>
                   <CFormLabel>Goal</CFormLabel>
                 </CCol>
                 <CCol md={3}>
-                  <CFormTextarea
-                    value={form.goal}
-                    onChange={onChange('goal')}
-                    rows={5}
-                    disabled={!isEdit}
-                  />
+                  <CFormTextarea value={form.goal} onChange={onChange('goal')} rows={5} disabled={!isEdit} />
                 </CCol>
 
-                {/* Form actions */}
+                {/* Save / Cancel */}
                 <CCol xs={12} className="d-flex justify-content-end gap-2">
-                  <ArpButton
-                    label="Save"
-                    icon="save"
-                    color="success"
-                    type="submit"
-                    disabled={!isEdit}
-                  />
-                  <ArpButton
-                    label="Cancel"
-                    icon="cancel"
-                    color="secondary"
-                    type="button"
-                    onClick={onCancel}
-                  />
+                  <ArpButton label="Save" icon="save" color="success" type="submit" disabled={!isEdit} />
+                  <ArpButton label="Cancel" icon="cancel" color="secondary" type="button" onClick={onCancel} />
                 </CCol>
               </CRow>
             </CForm>
           </CCardBody>
         </CCard>
 
-        {/* Department Details */}
+        {/* ================= TABLE CARD ================= */}
         <CCard className="mb-3">
-          {/* Header line: title + actions right */}
+          {/* ✅ All in ONE ROW: Search + Page size + action icons */}
           <CCardHeader className="d-flex justify-content-between align-items-center">
             <strong>Department Details</strong>
 
-            <div className="d-flex gap-2 align-items-center flex-nowrap">
-              <ArpIconButton
-                icon="view"
-                color="purple"
-                title="View"
-                onClick={onView}
-                disabled={!selectedCode}
-              />
-              <ArpIconButton
-                icon="edit"
-                color="info"
-                title="Edit"
-                onClick={onEdit}
-                disabled={!selectedCode}
-              />
-              <ArpIconButton icon="delete" color="danger" title="Delete" disabled={!selectedCode} />
-            </div>
-          </CCardHeader>
-
-          <CCardBody>
-            {/* ✅ Search + Page Size (SAME LINE, NO WRAP) */}
-            <div className="d-flex align-items-center gap-2 flex-nowrap mb-2">
-              <CInputGroup style={{ width: 320 }}>
+            <div className="d-flex align-items-center gap-2 flex-nowrap" style={{ overflowX: 'auto' }}>
+              <CInputGroup size="sm" style={{ width: 280, flex: '0 0 auto' }}>
                 <CInputGroupText>
                   <CIcon icon={cilSearch} />
                 </CInputGroupText>
@@ -388,49 +328,58 @@ const Department = () => {
               </CInputGroup>
 
               <CFormSelect
+                size="sm"
                 value={pageSize}
                 onChange={(e) => setPageSize(Number(e.target.value))}
-                style={{ width: 120 }}
+                style={{ width: 120, flex: '0 0 auto' }}
                 title="Rows per page"
               >
                 {[5, 10, 20, 50].map((n) => (
                   <option key={n} value={n}>
-                    {n} / page
+                    {n}
                   </option>
                 ))}
               </CFormSelect>
-            </div>
 
-            <CTable bordered striped hover responsive className="mb-2">
-              <CTableHead>
+              <div className="d-flex gap-2 align-items-center flex-nowrap" style={{ flex: '0 0 auto' }}>
+                <ArpIconButton
+                  icon="view"
+                  color="purple"
+                  title="View"
+                  onClick={onView}
+                  disabled={!selectedCode}
+                />
+                <ArpIconButton
+                  icon="edit"
+                  color="info"
+                  title="Edit"
+                  onClick={onEdit}
+                  disabled={!selectedCode}
+                />
+                <ArpIconButton icon="delete" color="danger" title="Delete" disabled={!selectedCode} />
+              </div>
+            </div>
+          </CCardHeader>
+
+          <CCardBody>
+            <CTable hover responsive align="middle">
+              <CTableHead color="light">
                 <CTableRow>
                   <CTableHeaderCell style={{ width: 60 }}>Select</CTableHeaderCell>
 
-                  <CTableHeaderCell
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => sortToggle('deptCode')}
-                  >
+                  <CTableHeaderCell style={{ cursor: 'pointer' }} onClick={() => sortToggle('deptCode')}>
                     Department Code{sortIndicator('deptCode')}
                   </CTableHeaderCell>
 
-                  <CTableHeaderCell
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => sortToggle('deptName')}
-                  >
+                  <CTableHeaderCell style={{ cursor: 'pointer' }} onClick={() => sortToggle('deptName')}>
                     Department Name{sortIndicator('deptName')}
                   </CTableHeaderCell>
 
-                  <CTableHeaderCell
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => sortToggle('estYear')}
-                  >
+                  <CTableHeaderCell style={{ cursor: 'pointer' }} onClick={() => sortToggle('estYear')}>
                     Year of Establishments{sortIndicator('estYear')}
                   </CTableHeaderCell>
 
-                  <CTableHeaderCell
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => sortToggle('nbaAccredited')}
-                  >
+                  <CTableHeaderCell style={{ cursor: 'pointer' }} onClick={() => sortToggle('nbaAccredited')}>
                     NBA Accreditation{sortIndicator('nbaAccredited')}
                   </CTableHeaderCell>
 
@@ -480,14 +429,14 @@ const Department = () => {
               </CTableBody>
             </CTable>
 
-            {/* Bottom: Pagination only */}
-            <div className="d-flex justify-content-end">
-              <CPagination align="end" className="mb-0">
-                <CPaginationItem
-                  disabled={safePage <= 1}
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                >
-                  Prev
+            {/* ✅ CoursesConfiguration-style pagination */}
+            <div className="d-flex justify-content-end mt-2">
+              <CPagination size="sm" className="mb-0">
+                <CPaginationItem disabled={safePage <= 1} onClick={() => setPage(1)}>
+                  «
+                </CPaginationItem>
+                <CPaginationItem disabled={safePage <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>
+                  ‹
                 </CPaginationItem>
 
                 {Array.from({ length: totalPages })
@@ -510,7 +459,10 @@ const Department = () => {
                   disabled={safePage >= totalPages}
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 >
-                  Next
+                  ›
+                </CPaginationItem>
+                <CPaginationItem disabled={safePage >= totalPages} onClick={() => setPage(totalPages)}>
+                  »
                 </CPaginationItem>
               </CPagination>
             </div>

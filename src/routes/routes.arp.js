@@ -2,11 +2,21 @@ import React from 'react'
 const Institution = React.lazy(() => import('../views/setup/Institution'))
 const Department = React.lazy(() => import('../views/setup/Department'))
 const Programmes = React.lazy(() => import('../views/setup/Programmes'))
-const AcademicYearConfiguration = React.lazy(() => import('../views/setup/AcademicYearConfiguration'),)
+const AcademicYearConfiguration = React.lazy(() => import('../views/setup/AcademicYearConfiguration'))
 const ClassesConfiguration = React.lazy(() => import('../views/setup/ClassesConfiguration'))
 const RegulationConfiguration = React.lazy(() => import('../views/setup/RegulationConfiguration'))
-
-
+const CoursesConfiguration = React.lazy(() => import('../views/setup/CoursesConfiguration'))
+const RegulationMapConfiguration = React.lazy(() => import('../views/setup/RegulationMapConfiguration'))
+const CommonScheduleConfiguration = React.lazy(() => import('../views/setup/CommonScheduleConfiguration'))
+const StudentConfiguration= React.lazy(() => import('../views/setup/StudentConfiguration'))
+const FacultyConfiguration= React.lazy(() => import('../views/setup/FacultyConfiguration'))
+const CalendarConfiguration= React.lazy(() => import('../views/setup/CalendarConfiguration'))
+const TimetableConfiguration = React.lazy(() => import('../views/setup/TimetableConfiguration'))
+const QuestionModelConfiguration = React.lazy(() => import('../views/setup/QuestionModelConfiguration'))
+const CIAComponentsConfiguration = React.lazy(() => import('../views/setup/CIAComponentsConfiguration'))
+const CIAComputationConfiguration = React.lazy(() => import('../views/setup/CIAComputationConfiguration'))
+const AssessmentSetupConfiguration= React.lazy(() => import('../views/setup/AssessmentSetupConfiguration'))
+const UploadPhotoConfiguration= React.lazy(() => import('../views/setup/UploadPhotoConfiguration'))
 const Page = (name) => () => <div className="p-4">{name}</div>
 
 const routes = [
@@ -22,22 +32,23 @@ const routes = [
   { path: '/setup/programmes', name: 'Programmes', element: Programmes },
   { path: '/setup/academic-year', name: 'Academic Year', element: AcademicYearConfiguration },
   { path: '/setup/classes', name: 'Classes', element: ClassesConfiguration },
-
   { path: '/setup/regulation', name: 'Regulation', element: RegulationConfiguration },
-
-  
-  { path: '/setup/courses', name: 'Courses', element: Page('Courses') },
-  { path: '/setup/regulation-map', name: 'Regulation Map', element: Page('Regulation Map') },
-  { path: '/setup/combined-courses', name: 'Combined Courses', element: Page('Combined Courses') },
-  { path: '/setup/student', name: 'Student', element: Page('Student') },
-  { path: '/setup/faculty', name: 'Faculty', element: Page('Faculty') },
-  { path: '/setup/calendar', name: 'Calendar', element: Page('Calendar') },
-  { path: '/setup/timetable', name: 'Timetable', element: Page('Timetable') },
-  { path: '/setup/question-models', name: 'Question Models', element: Page('Question Models') },
-  { path: '/setup/cia-components', name: 'CIA Components', element: Page('CIA Components') },
-  { path: '/setup/cia-computations', name: 'CIA Computations', element: Page('CIA Computations') },
-  { path: '/setup/assessment-setup', name: 'Assessment Setup', element: Page('Assessment Setup') },
-  { path: '/setup/upload-photo', name: 'Upload Photo', element: Page('Upload Photo') },
+  { path: '/setup/courses', name: 'Courses Configuration', element: CoursesConfiguration },
+  { path: '/setup/regulation-map', name: 'Regulation Map', element: RegulationMapConfiguration },
+  {
+    path: '/setup/combined-courses',
+    name: 'Combined Courses',
+    element: CommonScheduleConfiguration,
+  },
+  { path: '/setup/student', name: 'Student', element: StudentConfiguration },
+  { path: '/setup/faculty', name: 'Faculty', element: FacultyConfiguration },
+  { path: '/setup/calendar', name: 'Calendar', element: CalendarConfiguration },
+  { path: '/setup/timetable', name: 'Timetable', element: TimetableConfiguration },
+  { path: '/setup/question-models', name: 'Question Models', element: QuestionModelConfiguration },
+  { path: '/setup/cia-components', name: 'CIA Components', element: CIAComponentsConfiguration },
+  { path: '/setup/cia-computations', name: 'CIA Computations', element: CIAComputationConfiguration },
+  { path: '/setup/assessment-setup', name: 'Assessment Setup', element: AssessmentSetupConfiguration },
+  { path: '/setup/upload-photo', name: 'Upload Photo', element: UploadPhotoConfiguration },
 
   // ===== Phase 2 : Accreditation =====
   { path: '/accreditation/add-manual', name: 'Add Manual', element: Page('Add Manual') },

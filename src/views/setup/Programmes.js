@@ -549,51 +549,25 @@ export default function Programmes() {
 
                 {/* ===================== Programmes Details (UPDATED LIKE DEPARTMENT) ===================== */}
                 <div className="card mt-3">
-                  {/* Header: title left + icons right */}
+                  {/* Header: title left + Search + Page Size + icons RIGHT (ONE ROW) */}
                   <div className="card-header d-flex justify-content-between align-items-center">
                     <div className="card-header-left">
                       <h5 className="mb-0">Programmes Details</h5>
                     </div>
 
-                    <div className="d-flex gap-2 align-items-center flex-nowrap">
-                      <ArpIconButton
-                        icon="view"
-                        color="purple"
-                        title="View"
-                        onClick={onView}
-                        disabled={!selectedId}
-                      />
-                      <ArpIconButton
-                        icon="edit"
-                        color="info"
-                        title="Edit"
-                        onClick={onEdit}
-                        disabled={!selectedId}
-                      />
-                      <ArpIconButton
-                        icon="delete"
-                        color="danger"
-                        title="Delete"
-                        onClick={onDelete}
-                        disabled={!selectedId}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="card-body">
-                    {/* Toolbar above table: Search + Page Size SAME LINE */}
-                    <div className="d-flex align-items-center gap-2 flex-nowrap mb-2">
+                    {/* ✅ ONE ROW: Search + Page Size + Action Icons (no wrap) */}
+                    <div className="d-flex align-items-center gap-2 flex-nowrap" style={{ overflowX: 'auto' }}>
                       <input
-                        className="form-control"
+                        className="form-control form-control-sm"
                         placeholder="Search..."
-                        style={{ width: 320 }}
+                        style={{ width: 280, flex: '0 0 auto' }}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                       />
 
                       <select
-                        className="form-control"
-                        style={{ width: 120 }}
+                        className="form-control form-control-sm"
+                        style={{ width: 120, flex: '0 0 auto' }}
                         value={pageSize}
                         onChange={(e) => setPageSize(Number(e.target.value))}
                         title="Rows per page"
@@ -604,7 +578,35 @@ export default function Programmes() {
                           </option>
                         ))}
                       </select>
+
+                      <div className="d-flex gap-2 align-items-center flex-nowrap" style={{ flex: '0 0 auto' }}>
+                        <ArpIconButton
+                          icon="view"
+                          color="purple"
+                          title="View"
+                          onClick={onView}
+                          disabled={!selectedId}
+                        />
+                        <ArpIconButton
+                          icon="edit"
+                          color="info"
+                          title="Edit"
+                          onClick={onEdit}
+                          disabled={!selectedId}
+                        />
+                        <ArpIconButton
+                          icon="delete"
+                          color="danger"
+                          title="Delete"
+                          onClick={onDelete}
+                          disabled={!selectedId}
+                        />
+                      </div>
                     </div>
+                  </div>
+
+                  <div className="card-body">
+                    {/* Toolbar above table: Search + Page Size SAME LINE */}
 
                     <table className="table table-bordered table-hover">
                       <thead>
