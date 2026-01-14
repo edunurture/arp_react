@@ -2,11 +2,9 @@ import React from 'react'
 const Institution = React.lazy(() => import('../views/setup/Institution'))
 const Department = React.lazy(() => import('../views/setup/Department'))
 const Programmes = React.lazy(() => import('../views/setup/Programmes'))
-const AcademicYearConfiguration = React.lazy(
-  () => import('../views/setup/AcademicYearConfiguration'),
-)
-
-
+const AcademicYearConfiguration = React.lazy(() => import('../views/setup/AcademicYearConfiguration'),)
+const ClassesConfiguration = React.lazy(() => import('../views/setup/ClassesConfiguration'))
+const RegulationConfiguration = React.lazy(() => import('../views/setup/RegulationConfiguration'))
 
 
 const Page = (name) => () => <div className="p-4">{name}</div>
@@ -22,11 +20,12 @@ const routes = [
   { path: '/setup/institution', name: 'Institution', element: Institution },
   { path: '/setup/department', name: 'Department', element: Department },
   { path: '/setup/programmes', name: 'Programmes', element: Programmes },
-
   { path: '/setup/academic-year', name: 'Academic Year', element: AcademicYearConfiguration },
+  { path: '/setup/classes', name: 'Classes', element: ClassesConfiguration },
 
-  { path: '/setup/classes', name: 'Classes', element: Page('Classes') },
-  { path: '/setup/regulation', name: 'Regulation', element: Page('Regulation') },
+  { path: '/setup/regulation', name: 'Regulation', element: RegulationConfiguration },
+
+  
   { path: '/setup/courses', name: 'Courses', element: Page('Courses') },
   { path: '/setup/regulation-map', name: 'Regulation Map', element: Page('Regulation Map') },
   { path: '/setup/combined-courses', name: 'Combined Courses', element: Page('Combined Courses') },

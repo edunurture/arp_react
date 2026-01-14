@@ -195,12 +195,13 @@ const AcademicYearConfiguration = () => {
                 </CRow>
 
                 <div className="text-end mt-3">
-                  <CButton type="submit" size="sm" color="success" disabled={!isAyEnabled}>
+                  <CButton type="submit" size="sm" color="success" disabled={!isAyEnabled} className="text-white">
                     <CIcon icon={cilSave} className="me-1" /> Save
                   </CButton>{' '}
                   <CButton
                     size="sm"
                     color="secondary"
+                    className="text-white"
                     disabled={!isAyEnabled}
                     onClick={() => {
                       resetAy()
@@ -269,12 +270,13 @@ const AcademicYearConfiguration = () => {
                 </CRow>
 
                 <div className="text-end mt-3">
-                  <CButton type="submit" size="sm" color="success" disabled={!isCalEnabled}>
+                  <CButton type="submit" size="sm" color="success" disabled={!isCalEnabled} className="text-white">
                     <CIcon icon={cilSave} className="me-1" /> Save
                   </CButton>{' '}
                   <CButton
                     size="sm"
                     color="secondary"
+                    className="text-white"
                     disabled={!isCalEnabled}
                     onClick={() => {
                       resetCal()
