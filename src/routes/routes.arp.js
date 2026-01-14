@@ -2,6 +2,11 @@ import React from 'react'
 const Institution = React.lazy(() => import('../views/setup/Institution'))
 const Department = React.lazy(() => import('../views/setup/Department'))
 const Programmes = React.lazy(() => import('../views/setup/Programmes'))
+const AcademicYearConfiguration = React.lazy(
+  () => import('../views/setup/AcademicYearConfiguration'),
+)
+
+
 
 
 const Page = (name) => () => <div className="p-4">{name}</div>
@@ -16,9 +21,10 @@ const routes = [
   // Setup dropdown items
   { path: '/setup/institution', name: 'Institution', element: Institution },
   { path: '/setup/department', name: 'Department', element: Department },
-  { path: '/setup/programmes', name: 'Programmes', element: Programmes},
+  { path: '/setup/programmes', name: 'Programmes', element: Programmes },
 
-  { path: '/setup/academic-year', name: 'Academic Year', element: Page('Academic Year') },
+  { path: '/setup/academic-year', name: 'Academic Year', element: AcademicYearConfiguration },
+
   { path: '/setup/classes', name: 'Classes', element: Page('Classes') },
   { path: '/setup/regulation', name: 'Regulation', element: Page('Regulation') },
   { path: '/setup/courses', name: 'Courses', element: Page('Courses') },
