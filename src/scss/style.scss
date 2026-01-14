@@ -1,0 +1,188 @@
+@use "@coreui/coreui/scss/coreui" as * with ( 
+  $enable-deprecation-messages: false,
+);
+@use "@coreui/chartjs/scss/coreui-chartjs";
+@use "vendors/simplebar";
+@use "arp_sidebar";
+
+body {
+  background-color: var(--cui-tertiary-bg);
+}
+
+.wrapper {
+  width: 100%;
+  padding-inline: var(--cui-sidebar-occupy-start, 0) var(--cui-sidebar-occupy-end, 0);
+  will-change: auto;
+  @include transition(padding .15s);
+}
+
+.header > .container-fluid,
+.sidebar-header {
+  min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+.sidebar-brand-full {
+  margin-left: 3px;
+}
+
+.sidebar-header {
+  .nav-underline-border {
+    --cui-nav-underline-border-link-padding-x: 1rem;
+    --cui-nav-underline-border-gap: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+  }
+}
+
+.sidebar-toggler {
+  margin-inline-start: auto;
+}
+
+.sidebar-narrow,
+.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-toggler {
+    margin-inline-end: auto;
+  }
+}
+
+.header > .container-fluid + .container-fluid {
+  min-height: 3rem;
+}
+
+.footer {
+  min-height: calc(3rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+@include color-mode(dark) {
+  body {
+    background-color: var(--cui-dark-bg-subtle);
+  }
+
+  .footer {
+    --cui-footer-bg: var(--cui-body-bg);
+  }
+}
+
+.sidebar img {
+  display: block;
+  margin: 0 auto;
+  max-width: 140px;
+}
+
+/* ================================
+   ARP: Active Nav Group = CoreUI Blue
+   Applies ONLY to parent nav group (not child items)
+   ================================ */
+
+/* When a nav group is opened/active -> make its parent link blue */
+.sidebar .nav-group.show > .nav-link,
+.sidebar .nav-group.active > .nav-link,
+.sidebar .nav-group.show > .nav-link.nav-link,
+.sidebar .nav-group.active > .nav-link.nav-link {
+  background-color: var(--cui-primary) !important; /* CoreUI blue */
+  color: #fff !important;
+}
+
+/* Keep icons in the parent link white too */
+.sidebar .nav-group.show > .nav-link .nav-icon,
+.sidebar .nav-group.active > .nav-link .nav-icon {
+  color: #fff !important;
+}
+
+/* Remove CoreUI left border/outline on expanded parent links */
+.sidebar .nav-group.show > .nav-link,
+.sidebar .nav-group.active > .nav-link {
+  border-left: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* IMPORTANT: Child dropdown items styling (keep default, fix hover contrast) */
+.sidebar .nav-group .nav-group-items .nav-link {
+  background-color: transparent;
+  color: #1F2933;
+}
+
+.sidebar .nav-group .nav-group-items .nav-link:hover,
+.sidebar .nav-group .nav-group-items .nav-link:focus {
+  background-color: #1F4B99 !important;
+  color: #fff !important;
+}
+
+.sidebar .nav-group .nav-group-items .nav-link:hover .nav-icon,
+.sidebar .nav-group .nav-group-items .nav-link:focus .nav-icon {
+  color: #fff !important;
+}
+
+.sidebar .nav-group .nav-group-items .nav-link.active {
+  background-color: #243040 !important;
+  color: #fff !important;
+}
+
+/* Optional: keep parent active blue even on hover */
+.sidebar .nav-group.show > .nav-link:hover,
+.sidebar .nav-group.active > .nav-link:hover {
+  background-color: var(--cui-primary) !important;
+  color: #fff !important;
+}
+
+/* =========================================
+   CHILD MENU – SELECTED (ACTIVE) STATE
+   Light background requirement
+   ========================================= */
+
+.sidebar .nav-group .nav-group-items .nav-link.active {
+  background-color: #E6ECF7 !important;  /* light blue */
+  color: #1F2933 !important;             /* dark readable text */
+  font-weight: 500;
+}
+
+/* Icon color when child is selected */
+.sidebar .nav-group .nav-group-items .nav-link.active .nav-icon {
+  color: #1F4B99 !important;
+}
+
+.btn-purple {
+  background-color: #6f42c1 !important;
+  border-color: #6f42c1 !important;
+  color: #fff !important;
+}
+.btn-purple:hover {
+  filter: brightness(0.95);
+}
+
+/* Tables */
+.table th {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.table td {
+  font-size: 13px;
+}
+
+/* Compact ERP-style table rows */
+.table th,
+.table td {
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+}
+
+/* Inputs & selects */
+.form-control,
+.form-select,
+textarea {
+  font-family: var(--arp-font-family);
+  font-size: 14px;
+}
+
+/* Pagination */
+.pagination .page-link {
+  font-size: 13px;
+}
+

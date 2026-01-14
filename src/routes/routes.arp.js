@@ -1,0 +1,297 @@
+import React from 'react'
+const Institution = React.lazy(() => import('../views/setup/Institution'))
+const Department = React.lazy(() => import('../views/setup/Department'))
+const Programmes = React.lazy(() => import('../views/setup/Programmes'))
+
+
+const Page = (name) => () => <div className="p-4">{name}</div>
+
+const routes = [
+  { path: '/', exact: true, name: 'Home' },
+
+  // Home items
+  { path: '/home', name: 'Home', element: Page('Home') },
+  { path: '/dashboard', name: 'Dashboard', element: Page('Dashboard') },
+
+  // Setup dropdown items
+  { path: '/setup/institution', name: 'Institution', element: Institution },
+  { path: '/setup/department', name: 'Department', element: Department },
+  { path: '/setup/programmes', name: 'Programmes', element: Programmes},
+
+  { path: '/setup/academic-year', name: 'Academic Year', element: Page('Academic Year') },
+  { path: '/setup/classes', name: 'Classes', element: Page('Classes') },
+  { path: '/setup/regulation', name: 'Regulation', element: Page('Regulation') },
+  { path: '/setup/courses', name: 'Courses', element: Page('Courses') },
+  { path: '/setup/regulation-map', name: 'Regulation Map', element: Page('Regulation Map') },
+  { path: '/setup/combined-courses', name: 'Combined Courses', element: Page('Combined Courses') },
+  { path: '/setup/student', name: 'Student', element: Page('Student') },
+  { path: '/setup/faculty', name: 'Faculty', element: Page('Faculty') },
+  { path: '/setup/calendar', name: 'Calendar', element: Page('Calendar') },
+  { path: '/setup/timetable', name: 'Timetable', element: Page('Timetable') },
+  { path: '/setup/question-models', name: 'Question Models', element: Page('Question Models') },
+  { path: '/setup/cia-components', name: 'CIA Components', element: Page('CIA Components') },
+  { path: '/setup/cia-computations', name: 'CIA Computations', element: Page('CIA Computations') },
+  { path: '/setup/assessment-setup', name: 'Assessment Setup', element: Page('Assessment Setup') },
+  { path: '/setup/upload-photo', name: 'Upload Photo', element: Page('Upload Photo') },
+
+  // ===== Phase 2 : Accreditation =====
+  { path: '/accreditation/add-manual', name: 'Add Manual', element: Page('Add Manual') },
+  {
+    path: '/accreditation/add-data-labels',
+    name: 'Add Data Labels',
+    element: Page('Add Data Labels'),
+  },
+  {
+    path: '/accreditation/extended-profile',
+    name: 'Extended Profile',
+    element: Page('Extended Profile'),
+  },
+  {
+    path: '/accreditation/add-ep-metrics',
+    name: 'Add EP Metrics',
+    element: Page('Add EP Metrics'),
+  },
+  { path: '/accreditation/criteria', name: 'Criteria', element: Page('Criteria') },
+  {
+    path: '/accreditation/key-indicators',
+    name: 'Key Indicators',
+    element: Page('Key Indicators'),
+  },
+  { path: '/accreditation/main-metrics', name: 'Main Metrics', element: Page('Main Metrics') },
+  { path: '/accreditation/sub-metrics', name: 'Sub Metrics', element: Page('Sub Metrics') },
+  { path: '/accreditation/qualitative', name: 'Qualitative', element: Page('Qualitative') },
+  { path: '/accreditation/quantitative', name: 'Quantitative', element: Page('Quantitative') },
+  { path: '/accreditation/grade', name: 'Grade', element: Page('Grade') },
+  { path: '/accreditation/documents', name: 'Documents', element: Page('Documents') },
+  { path: '/accreditation/expert-panel', name: 'Expert Panel', element: Page('Expert Panel') },
+
+  // ===== Phase 3 : Learning Management System =====
+  { path: '/lms/course-allotment', name: 'Course Allotment', element: Page('Course Allotment') },
+  { path: '/lms/student-allotment', name: 'Student Allotment', element: Page('Student Allotment') },
+  { path: '/lms/upload-timetable', name: 'Upload Timetable', element: Page('Upload Timetable') },
+  { path: '/lms/view-timetable', name: 'View Timetable', element: Page('View Timetable') },
+  { path: '/lms/view-calendar', name: 'View Calendar', element: Page('View Calendar') },
+  { path: '/lms/course-contents', name: 'Course Contents', element: Page('Course Contents') },
+  { path: '/lms/course-materials', name: 'Course Materials', element: Page('Course Materials') },
+  { path: '/lms/common-schedule', name: 'Common Schedule', element: Page('Common Schedule') },
+  { path: '/lms/lecture-schedule', name: 'Lecture Schedule', element: Page('Lecture Schedule') },
+  { path: '/lms/attendance', name: 'Attendance', element: Page('Attendance') },
+  {
+    path: '/lms/syllabus-completion',
+    name: 'Syllabus Completion',
+    element: Page('Syllabus Completion'),
+  },
+  { path: '/lms/online-classes', name: 'Online Classes', element: Page('Online Classes') },
+  { path: '/lms/activities', name: 'Activities', element: Page('Activities') },
+  {
+    path: '/lms/learner-activities',
+    name: 'Learner Activities',
+    element: Page('Learner Activities'),
+  },
+  { path: '/lms/assignments', name: 'Assignments', element: Page('Assignments') },
+  {
+    path: '/lms/internal-assessment',
+    name: 'Internal Assessment',
+    element: Page('Internal Assessment'),
+  },
+
+  // ===== Phase 4 : Academic Events =====
+  { path: '/academics/tutor-ward', name: 'Tutor Ward', element: Page('Tutor Ward') },
+  { path: '/academics/ward-enrollment', name: 'Ward Enrollment', element: Page('Ward Enrollment') },
+  { path: '/academics/ward-profile', name: 'Ward Profile', element: Page('Ward Profile') },
+  { path: '/academics/ward-meetings', name: 'Ward Meetings', element: Page('Ward Meetings') },
+  { path: '/academics/academic-events', name: 'Academic Events', element: Page('Academic Events') },
+  { path: '/academics/student-profile', name: 'Student Profile', element: Page('Student Profile') },
+  { path: '/academics/faculty-profile', name: 'Faculty Profile', element: Page('Faculty Profile') },
+
+  // ===== Phase 5 : Outcome Based Education =====
+  { path: '/obe/dashboard', name: 'OBE Dashboard', element: Page('OBE Dashboard') },
+  { path: '/obe/configuration', name: 'OBE Configuration', element: Page('OBE Configuration') },
+  { path: '/obe/course-outcomes', name: 'Course Outcomes', element: Page('Course Outcomes') },
+  { path: '/obe/mark-entry', name: 'Mark Entry', element: Page('Mark Entry') },
+  { path: '/obe/obe-attainment', name: 'OBE Attainment', element: Page('OBE Attainment') },
+  {
+    path: '/obe/attainment-reports',
+    name: 'Attainment Reports',
+    element: Page('Attainment Reports'),
+  },
+  {
+    path: '/obe/articulation-matrix',
+    name: 'Articulation Matrix',
+    element: Page('Articulation Matrix'),
+  },
+
+  // ===== Phase 6 : Internal Assessment =====
+  { path: '/evaluation/question-bank', name: 'Question Bank', element: Page('Question Bank') },
+  { path: '/evaluation/question-paper', name: 'Question Paper', element: Page('Question Paper') },
+  {
+    path: '/evaluation/schedule-examination',
+    name: 'Schedule Examination',
+    element: Page('Schedule Examination'),
+  },
+  {
+    path: '/evaluation/online-examination',
+    name: 'Online Examination',
+    element: Page('Online Examination'),
+  },
+  { path: '/evaluation/mark-entry', name: 'Mark Entry', element: Page('Mark Entry') },
+  {
+    path: '/evaluation/result-analysis',
+    name: 'Result Analysis',
+    element: Page('Result Analysis'),
+  },
+
+  // ===== Phase 7 : Research & Innovation =====
+  {
+    path: '/research/activities',
+    name: 'Research Activities',
+    element: Page('Research Activities'),
+  },
+  { path: '/research/innovation', name: 'Innovation', element: Page('Innovation') },
+  { path: '/research/extension', name: 'Extension', element: Page('Extension') },
+  { path: '/research/outreach', name: 'Outreach', element: Page('Outreach') },
+  { path: '/research/collaboration', name: 'Collaboration', element: Page('Collaboration') },
+  { path: '/research/mous', name: 'MoUs', element: Page('MoUs') },
+
+  // ===== Phase 8 : Student Support System =====
+  {
+    path: '/student-support/skill-enhancement',
+    name: 'Skill Enhancement',
+    element: Page('Skill Enhancement'),
+  },
+  {
+    path: '/student-support/competitive-exams',
+    name: 'Competitive Exams',
+    element: Page('Competitive Exams'),
+  },
+
+  // ===== Phase 9 : Student Information System =====
+  { path: '/student-profile/basic-profile', name: 'Basic Profile', element: Page('Basic Profile') },
+  {
+    path: '/student-profile/academic-profile',
+    name: 'Academic Profile',
+    element: Page('Academic Profile'),
+  },
+  {
+    path: '/student-profile/extra-curricular',
+    name: 'Extra-Curricular',
+    element: Page('Extra-Curricular'),
+  },
+  { path: '/student-profile/placements', name: 'Placements', element: Page('Placements') },
+  { path: '/student-profile/progression', name: 'Progression', element: Page('Progression') },
+
+  // ===== Phase 10 : Grievance System =====
+  { path: '/grievances/view-affidavit', name: 'View Affidavit', element: Page('View Affidavit') },
+  {
+    path: '/grievances/view-complaints',
+    name: 'View Complaints',
+    element: Page('View Complaints'),
+  },
+  {
+    path: '/grievances/exam',
+    name: 'Examination Grievances',
+    element: Page('Examination Grievances'),
+  },
+  { path: '/grievances/general', name: 'General Grievances', element: Page('General Grievances') },
+
+  // ===== Phase 11 : Placement Information =====
+  {
+    path: '/placements/company-details',
+    name: 'Company Details',
+    element: Page('Company Details'),
+  },
+  { path: '/placements/mous', name: 'Placement MoUs', element: Page('Placement MoUs') },
+  { path: '/placements/schedule', name: 'Placement Schedule', element: Page('Placement Schedule') },
+  {
+    path: '/placements/activities',
+    name: 'Placement Activities',
+    element: Page('Placement Activities'),
+  },
+  { path: '/placements/drives', name: 'Placement Drives', element: Page('Placement Drives') },
+  { path: '/placements/offers', name: 'Placement Offers', element: Page('Placement Offers') },
+  { path: '/placements/reports', name: 'Placement Reports', element: Page('Placement Reports') },
+
+  // ===== Phase 12 : Accreditation System (AMS) =====
+  { path: '/ams/dashboard', name: 'AMS Dashboard', element: Page('AMS Dashboard') },
+  { path: '/ams/mous', name: 'AMS MoUs', element: Page('AMS MoUs') },
+  { path: '/ams/profile-ssr', name: 'Profile of SSR', element: Page('Profile of SSR') },
+  {
+    path: '/ams/extended-profile',
+    name: 'AMS Extended Profile',
+    element: Page('AMS Extended Profile'),
+  },
+  { path: '/ams/executive-summary', name: 'Executive Summary', element: Page('Executive Summary') },
+  { path: '/ams/qif-metrics', name: 'QIF Metrics', element: Page('QIF Metrics') },
+  { path: '/ams/expert-views', name: 'Expert Views', element: Page('Expert Views') },
+  { path: '/ams/ssr-introspect', name: 'SSR Introspect', element: Page('SSR Introspect') },
+  { path: '/ams/cgpa-score', name: 'CGPA Score', element: Page('CGPA Score') },
+  { path: '/ams/submit-ssr', name: 'Submit SSR', element: Page('Submit SSR') },
+
+  // ===== Phase 13 : Admin (Governance) =====
+  { path: '/governance/circular', name: 'Circular', element: Page('Circular') },
+  { path: '/governance/communication', name: 'Communication', element: Page('Communication') },
+  {
+    path: '/governance/leave-management',
+    name: 'Leave Management',
+    element: Page('Leave Management'),
+  },
+  {
+    path: '/governance/activities',
+    name: 'Governance Activities',
+    element: Page('Governance Activities'),
+  },
+  { path: '/governance/drives', name: 'Governance Drives', element: Page('Governance Drives') },
+  { path: '/governance/offers', name: 'Governance Offers', element: Page('Governance Offers') },
+  { path: '/governance/reports', name: 'Governance Reports', element: Page('Governance Reports') },
+
+  // ===== Phase 14 : Feedback System =====
+  {
+    path: '/feedback/configuration',
+    name: 'Feedback Configuration',
+    element: Page('Feedback Configuration'),
+  },
+  { path: '/feedback/feedback', name: 'Feedback', element: Page('Feedback') },
+  { path: '/feedback/course-feedback', name: 'Course Feedback', element: Page('Course Feedback') },
+  { path: '/feedback/assign-feedback', name: 'Assign Feedback', element: Page('Assign Feedback') },
+  { path: '/feedback/analysis-report', name: 'Analysis Report', element: Page('Analysis Report') },
+
+  // ===== Phase 15 : Report System =====
+  { path: '/reports/primary', name: 'Primary Reports', element: Page('Primary Reports') },
+  { path: '/reports/academics', name: 'Academics Reports', element: Page('Academics Reports') },
+  {
+    path: '/reports/compliances',
+    name: 'Compliances Reports',
+    element: Page('Compliances Reports'),
+  },
+  {
+    path: '/reports/accreditation',
+    name: 'Accreditation Reports',
+    element: Page('Accreditation Reports'),
+  },
+  {
+    path: '/reports/miscellaneous',
+    name: 'Miscellaneous Reports',
+    element: Page('Miscellaneous Reports'),
+  },
+
+  // ===== Phase 16 : Gallery =====
+  { path: '/gallery', name: 'Gallery', element: Page('Gallery') },
+
+  // ===== Phase 17 : FAQ =====
+  { path: '/faq', name: 'FAQ', element: Page('FAQ') },
+
+  // ===== Phase 18 : ARP Management =====
+  {
+    path: '/arp/support-helpdesk',
+    name: 'Support & Helpdesk',
+    element: Page('Support & Helpdesk'),
+  },
+  { path: '/arp/invoices', name: 'Invoices', element: Page('Invoices') },
+  { path: '/arp/payments', name: 'Payments', element: Page('Payments') },
+
+  // ===== Phase 19 : Authorization =====
+  { path: '/auth/admin', name: 'Authorization - Admin', element: Page('Authorization - Admin') },
+  { path: '/auth/groups', name: 'Authorization - Groups', element: Page('Authorization - Groups') },
+]
+
+export default routes

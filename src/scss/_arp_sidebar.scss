@@ -1,0 +1,185 @@
+/* =====================================================
+   ARP Sidebar Theme – WHITE Background (Enterprise)
+   ===================================================== */
+
+/* ---------- Base Sidebar (WHITE) ---------- */
+.sidebar {
+  background-color: #ffffff !important;
+  color: #1F2933;
+  border-right: 1px solid #E5E7EB;
+
+  /* CoreUI width variables (important for docked mode) */
+  --cui-sidebar-width: 256px;
+  --cui-sidebar-narrow-width: 76px; /* increase to avoid icon clipping */
+}
+
+/* Brand area (keep dark for logo contrast) */
+.sidebar .sidebar-brand {
+  background-color: #0C1013;
+}
+
+/* Sidebar header area */
+.sidebar .sidebar-header {
+  background-color: #ffffff !important;
+}
+
+/* Section titles */
+.sidebar .nav-title {
+  color: #6B7280;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Nav links (default) ---------- */
+.sidebar .nav-link {
+  color: #1F2933;
+  border-radius: 10px;
+  margin: 2px 10px;
+}
+
+.sidebar .nav-link .nav-icon {
+  color: #4B5563;
+}
+
+/* Hover */
+.sidebar .nav-link:hover {
+  background-color: #1F4B99;
+  color: #ffffff;
+}
+
+.sidebar .nav-link:hover .nav-icon {
+  color: #ffffff;
+}
+
+/* Active */
+.sidebar .nav-link.active,
+.sidebar .nav-group.show > .nav-link {
+  background-color: #243040;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.sidebar .nav-link.active .nav-icon {
+  color: #ffffff;
+}
+
+/* Home always blue */
+.sidebar .nav-link[href="/dashboard"],
+.sidebar .nav-link[href="/"] {
+  background-color: #1F4B99 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.sidebar .nav-link[href="/dashboard"] .nav-icon,
+.sidebar .nav-link[href="/"] .nav-icon {
+  color: #ffffff !important;
+}
+
+/* Sub-menu indentation (expanded mode) */
+.sidebar .nav-group-items .nav-link {
+  margin-left: 18px;
+  border-left: 2px solid #E5E7EB;
+  border-radius: 8px;
+}
+
+.sidebar .nav-group-items .nav-link.active {
+  border-left-color: #1F4B99;
+}
+
+/* =====================================================
+   Sidebar Search Box – PURE WHITE (Final Override)
+   ===================================================== */
+
+.sidebar .arp-sidebar-search .input-group {
+  background-color: #ffffff !important;
+  border-radius: 10px;
+}
+
+.sidebar .arp-sidebar-search .input-group-text {
+  background-color: #ffffff !important;
+  border: 1px solid #E5E7EB !important;
+  border-right: none !important;
+  color: #1F2933 !important;
+}
+
+.sidebar .arp-sidebar-search .form-control {
+  background-color: #ffffff !important;
+  border: 1px solid #E5E7EB !important;
+  border-left: none !important;
+  color: #1F2933 !important;
+  box-shadow: none !important;
+}
+
+.sidebar .arp-sidebar-search .form-control::placeholder {
+  color: #9CA3AF !important;
+}
+
+.sidebar .arp-sidebar-search .input-group-text svg {
+  color: #4B5563 !important;
+}
+
+.sidebar .arp-sidebar-search .form-control:focus {
+  box-shadow: none !important;
+  border-color: #1F4B99 !important;
+}
+
+/* Toggler */
+.sidebar .sidebar-toggler {
+  background-color: #F3F4F6;
+}
+
+/* =====================================================
+   DOCKED / NARROW MODE (Icons-only) — NO CLIPPING
+   ===================================================== */
+
+/* Ensure narrow width applies */
+.sidebar.sidebar-narrow,
+.sidebar.sidebar-narrow-unfoldable {
+  width: var(--cui-sidebar-narrow-width) !important;
+}
+
+/* Prevent internal clipping that causes partial icons */
+.sidebar.sidebar-narrow .sidebar-nav,
+.sidebar.sidebar-narrow-unfoldable .sidebar-nav,
+.sidebar.sidebar-narrow .nav,
+.sidebar.sidebar-narrow-unfoldable .nav {
+  overflow: visible !important;
+}
+
+/* Center items, reduce horizontal squeeze */
+.sidebar.sidebar-narrow .nav-link,
+.sidebar.sidebar-narrow-unfoldable .nav-link {
+  margin: 4px 8px !important;
+  padding: 10px 0 !important;
+  justify-content: center !important;
+}
+
+/* Icon: keep fully visible */
+.sidebar.sidebar-narrow .nav-icon,
+.sidebar.sidebar-narrow-unfoldable .nav-icon {
+  margin: 0 !important;
+  min-width: 22px !important;
+}
+
+/* Hide nav labels + submenus fully in docked mode */
+.sidebar.sidebar-narrow .nav-link span,
+.sidebar.sidebar-narrow-unfoldable .nav-link span,
+.sidebar.sidebar-narrow .nav-group-items,
+.sidebar.sidebar-narrow-unfoldable .nav-group-items {
+  display: none !important;
+}
+
+/* Docked logo safe size */
+.sidebar.sidebar-narrow .sidebar-header img,
+.sidebar.sidebar-narrow-unfoldable .sidebar-header img {
+  max-width: 32px !important;
+  max-height: 32px !important;
+}
+
+/* Optional: tighten search area in docked mode (keeps clean look) */
+.sidebar.sidebar-narrow .arp-sidebar-search,
+.sidebar.sidebar-narrow-unfoldable .arp-sidebar-search {
+  display: none !important;
+}
