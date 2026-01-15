@@ -17,6 +17,11 @@ const CIAComponentsConfiguration = React.lazy(() => import('../views/setup/CIACo
 const CIAComputationConfiguration = React.lazy(() => import('../views/setup/CIAComputationConfiguration'))
 const AssessmentSetupConfiguration= React.lazy(() => import('../views/setup/AssessmentSetupConfiguration'))
 const UploadPhotoConfiguration= React.lazy(() => import('../views/setup/UploadPhotoConfiguration'))
+// Learning Management System (LMS) components can be added here similarly
+const CourseAllotment = React.lazy(() => import('../views/lms/CourseAllotment'))
+const StudentAllotment = React.lazy(() => import('../views/lms/StudentAllotment'))
+const UploadTimetable = React.lazy(() => import('../views/lms/UploadTimetable'))
+
 const Page = (name) => () => <div className="p-4">{name}</div>
 
 const routes = [
@@ -46,8 +51,16 @@ const routes = [
   { path: '/setup/timetable', name: 'Timetable', element: TimetableConfiguration },
   { path: '/setup/question-models', name: 'Question Models', element: QuestionModelConfiguration },
   { path: '/setup/cia-components', name: 'CIA Components', element: CIAComponentsConfiguration },
-  { path: '/setup/cia-computations', name: 'CIA Computations', element: CIAComputationConfiguration },
-  { path: '/setup/assessment-setup', name: 'Assessment Setup', element: AssessmentSetupConfiguration },
+  {
+    path: '/setup/cia-computations',
+    name: 'CIA Computations',
+    element: CIAComputationConfiguration,
+  },
+  {
+    path: '/setup/assessment-setup',
+    name: 'Assessment Setup',
+    element: AssessmentSetupConfiguration,
+  },
   { path: '/setup/upload-photo', name: 'Upload Photo', element: UploadPhotoConfiguration },
 
   // ===== Phase 2 : Accreditation =====
@@ -82,9 +95,12 @@ const routes = [
   { path: '/accreditation/expert-panel', name: 'Expert Panel', element: Page('Expert Panel') },
 
   // ===== Phase 3 : Learning Management System =====
-  { path: '/lms/course-allotment', name: 'Course Allotment', element: Page('Course Allotment') },
-  { path: '/lms/student-allotment', name: 'Student Allotment', element: Page('Student Allotment') },
-  { path: '/lms/upload-timetable', name: 'Upload Timetable', element: Page('Upload Timetable') },
+
+  { path: '/lms/course-allotment', name: 'Course Allotment', element: CourseAllotment },
+  { path: '/lms/student-allotment', name: 'Student Allotment', element: StudentAllotment},
+  { path: '/lms/upload-timetable', name: 'Upload Timetable', element: UploadTimetable },
+
+  
   { path: '/lms/view-timetable', name: 'View Timetable', element: Page('View Timetable') },
   { path: '/lms/view-calendar', name: 'View Calendar', element: Page('View Calendar') },
   { path: '/lms/course-contents', name: 'Course Contents', element: Page('Course Contents') },
