@@ -17,10 +17,19 @@ const CIAComponentsConfiguration = React.lazy(() => import('../views/setup/CIACo
 const CIAComputationConfiguration = React.lazy(() => import('../views/setup/CIAComputationConfiguration'))
 const AssessmentSetupConfiguration= React.lazy(() => import('../views/setup/AssessmentSetupConfiguration'))
 const UploadPhotoConfiguration= React.lazy(() => import('../views/setup/UploadPhotoConfiguration'))
+
 // Learning Management System (LMS) components can be added here similarly
 const CourseAllotment = React.lazy(() => import('../views/lms/CourseAllotment'))
 const StudentAllotment = React.lazy(() => import('../views/lms/StudentAllotment'))
 const UploadTimetable = React.lazy(() => import('../views/lms/UploadTimetable'))
+const ViewTimetable = React.lazy(() => import('../views/lms/ViewTimetable'))
+const ViewCalendar = React.lazy(() => import('../views/lms/ViewCalendar'))
+const CourseContents = React.lazy(() => import('../views/lms/CourseContents'))
+const CourseMaterials = React.lazy(() => import('../views/lms/CourseMaterials'))
+const CommonSchedule = React.lazy(() => import('../views/lms/CommonSchedule'))
+const LectureSchedule = React.lazy(() => import('../views/lms/LectureSchedule'))
+const Attendance = React.lazy(() => import('../views/lms/Attendance'))
+const LearningActivities = React.lazy(() => import('../views/lms/LearningActivities'))
 
 const Page = (name) => () => <div className="p-4">{name}</div>
 
@@ -95,26 +104,25 @@ const routes = [
   { path: '/accreditation/expert-panel', name: 'Expert Panel', element: Page('Expert Panel') },
 
   // ===== Phase 3 : Learning Management System =====
-
   { path: '/lms/course-allotment', name: 'Course Allotment', element: CourseAllotment },
-  { path: '/lms/student-allotment', name: 'Student Allotment', element: StudentAllotment},
+  { path: '/lms/student-allotment', name: 'Student Allotment', element: StudentAllotment },
   { path: '/lms/upload-timetable', name: 'Upload Timetable', element: UploadTimetable },
+  { path: '/lms/view-timetable', name: 'View Timetable', element: ViewTimetable },
+  { path: '/lms/view-calendar', name: 'View Calendar', element: ViewCalendar },
+  { path: '/lms/course-contents', name: 'Course Contents', element: CourseContents },
+  { path: '/lms/course-materials', name: 'Course Materials', element: CourseMaterials },
+  { path: '/lms/common-schedule', name: 'Common Schedule', element: CommonSchedule },
+  { path: '/lms/lecture-schedule', name: 'Lecture Schedule', element: LectureSchedule },
+  { path: '/lms/attendance', name: 'Attendance', element: Attendance },
 
-  
-  { path: '/lms/view-timetable', name: 'View Timetable', element: Page('View Timetable') },
-  { path: '/lms/view-calendar', name: 'View Calendar', element: Page('View Calendar') },
-  { path: '/lms/course-contents', name: 'Course Contents', element: Page('Course Contents') },
-  { path: '/lms/course-materials', name: 'Course Materials', element: Page('Course Materials') },
-  { path: '/lms/common-schedule', name: 'Common Schedule', element: Page('Common Schedule') },
-  { path: '/lms/lecture-schedule', name: 'Lecture Schedule', element: Page('Lecture Schedule') },
-  { path: '/lms/attendance', name: 'Attendance', element: Page('Attendance') },
   {
     path: '/lms/syllabus-completion',
     name: 'Syllabus Completion',
     element: Page('Syllabus Completion'),
   },
   { path: '/lms/online-classes', name: 'Online Classes', element: Page('Online Classes') },
-  { path: '/lms/activities', name: 'Activities', element: Page('Activities') },
+
+  { path: '/lms/activities', name: 'Activities', element: LearningActivities },
   {
     path: '/lms/learner-activities',
     name: 'Learner Activities',
