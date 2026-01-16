@@ -1,3 +1,4 @@
+import { element } from 'prop-types'
 import React from 'react'
 const Institution = React.lazy(() => import('../views/setup/Institution'))
 const Department = React.lazy(() => import('../views/setup/Department'))
@@ -29,7 +30,29 @@ const CourseMaterials = React.lazy(() => import('../views/lms/CourseMaterials'))
 const CommonSchedule = React.lazy(() => import('../views/lms/CommonSchedule'))
 const LectureSchedule = React.lazy(() => import('../views/lms/LectureSchedule'))
 const Attendance = React.lazy(() => import('../views/lms/Attendance'))
-const LearningActivities = React.lazy(() => import('../views/lms/LearningActivities'))
+const Activities = React.lazy(() => import('../views/lms/Activities'))
+const CourseCompletion = React.lazy(() => import('../views/lms/CourseCompletion'))
+const LearnerActivities = React.lazy(() => import('../views/lms/LearnerActivities'))
+const Assignments = React.lazy(() => import('../views/lms/Assignments'))
+const InternalAssessmentAssignments = React.lazy(() => import('../views/lms/InternalAssessmentAssignments'))
+
+
+// Academics components can be added here similarly
+const TutorWard = React.lazy(() => import('../views/academics/TutorWard'))
+const WardEnrollment = React.lazy(() => import('../views/academics/WardEnrollment'))
+const WardProfile = React.lazy(() => import('../views/academics/WardProfile'))
+const WardMeetings = React.lazy(() => import('../views/academics/WardMeetings'))
+const AcademicEvents = React.lazy(() => import('../views/academics/AcademicEvents'))
+const StudentProfile = React.lazy(() => import('../views/academics/StudentProfile'))
+const FacultyProfile = React.lazy(() => import('../views/academics/FacultyProfile'))
+
+// OBE components can be added here similarly
+const ObeConfiguration = React.lazy(() => import('../views/obe/ObeConfiguration'))
+const CourseOutcomes = React.lazy(() => import('../views/obe/CourseOutcomes'))
+const ObeMarkEntry = React.lazy(() => import('../views/obe/ObeMarkEntry'))
+const ObeAttainment = React.lazy(() => import('../views/obe/ObeAttainment'))
+const AttainmentReport = React.lazy(() => import('../views/obe/AttainmentReport'))
+const ArticulationMatrix = React.lazy(() => import('../views/obe/ArticulationMatrix'))
 
 const Page = (name) => () => <div className="p-4">{name}</div>
 
@@ -114,53 +137,38 @@ const routes = [
   { path: '/lms/common-schedule', name: 'Common Schedule', element: CommonSchedule },
   { path: '/lms/lecture-schedule', name: 'Lecture Schedule', element: LectureSchedule },
   { path: '/lms/attendance', name: 'Attendance', element: Attendance },
-
-  {
-    path: '/lms/syllabus-completion',
-    name: 'Syllabus Completion',
-    element: Page('Syllabus Completion'),
-  },
+  { path: '/lms/syllabus-completion', name: 'Course Completion', element: CourseCompletion },
+  { path: '/lms/activities', name: 'Activities', element: Activities },
   { path: '/lms/online-classes', name: 'Online Classes', element: Page('Online Classes') },
-
-  { path: '/lms/activities', name: 'Activities', element: LearningActivities },
-  {
-    path: '/lms/learner-activities',
-    name: 'Learner Activities',
-    element: Page('Learner Activities'),
-  },
-  { path: '/lms/assignments', name: 'Assignments', element: Page('Assignments') },
+  { path: '/lms/learner-activities', name: 'Learner Activities', element: LearnerActivities },
+  { path: '/lms/assignments', name: 'Assignments', element: Assignments },
   {
     path: '/lms/internal-assessment',
     name: 'Internal Assessment',
-    element: Page('Internal Assessment'),
+    element: InternalAssessmentAssignments,
   },
 
   // ===== Phase 4 : Academic Events =====
-  { path: '/academics/tutor-ward', name: 'Tutor Ward', element: Page('Tutor Ward') },
-  { path: '/academics/ward-enrollment', name: 'Ward Enrollment', element: Page('Ward Enrollment') },
-  { path: '/academics/ward-profile', name: 'Ward Profile', element: Page('Ward Profile') },
-  { path: '/academics/ward-meetings', name: 'Ward Meetings', element: Page('Ward Meetings') },
-  { path: '/academics/academic-events', name: 'Academic Events', element: Page('Academic Events') },
-  { path: '/academics/student-profile', name: 'Student Profile', element: Page('Student Profile') },
-  { path: '/academics/faculty-profile', name: 'Faculty Profile', element: Page('Faculty Profile') },
+  { path: '/academics/tutor-ward', name: 'Tutor Ward', element: TutorWard },
+  { path: '/academics/ward-enrollment', name: 'Ward Enrollment', element: WardEnrollment },
+  { path: '/academics/ward-profile', name: 'Ward Profile', element: WardProfile },
+  { path: '/academics/ward-meetings', name: 'Ward Meetings', element: WardMeetings },
+  { path: '/academics/academic-events', name: 'Academic Events', element: AcademicEvents },
+  { path: '/academics/student-profile', name: 'Student Profile', element: StudentProfile },
+  { path: '/academics/faculty-profile', name: 'Faculty Profile', element: FacultyProfile },
 
   // ===== Phase 5 : Outcome Based Education =====
   { path: '/obe/dashboard', name: 'OBE Dashboard', element: Page('OBE Dashboard') },
-  { path: '/obe/configuration', name: 'OBE Configuration', element: Page('OBE Configuration') },
-  { path: '/obe/course-outcomes', name: 'Course Outcomes', element: Page('Course Outcomes') },
-  { path: '/obe/mark-entry', name: 'Mark Entry', element: Page('Mark Entry') },
-  { path: '/obe/obe-attainment', name: 'OBE Attainment', element: Page('OBE Attainment') },
-  {
-    path: '/obe/attainment-reports',
-    name: 'Attainment Reports',
-    element: Page('Attainment Reports'),
-  },
-  {
-    path: '/obe/articulation-matrix',
-    name: 'Articulation Matrix',
-    element: Page('Articulation Matrix'),
-  },
+  { path: '/obe/configuration', name: 'OBE Configuration', element: ObeConfiguration },
+  { path: '/obe/course-outcomes', name: 'Course Outcomes', element: CourseOutcomes },
+  { path: '/obe/mark-entry', name: 'Mark Entry', element: ObeMarkEntry },
+  { path: '/obe/obe-attainment', name: 'OBE Attainment', element: ObeAttainment },
+  { path: '/obe/attainment-reports', name: 'Attainment Reports', element: AttainmentReport },
+  { path: '/obe/articulation-matrix', name: 'Articulation Matrix', element: ArticulationMatrix },
 
+  
+ 
+  
   // ===== Phase 6 : Internal Assessment =====
   { path: '/evaluation/question-bank', name: 'Question Bank', element: Page('Question Bank') },
   { path: '/evaluation/question-paper', name: 'Question Paper', element: Page('Question Paper') },
