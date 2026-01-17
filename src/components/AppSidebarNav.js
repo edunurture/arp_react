@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import SimpleBar from 'simplebar-react'
@@ -8,6 +8,26 @@ import 'simplebar-react/dist/simplebar.min.css'
 import { CBadge, CNavLink, CSidebarNav } from '@coreui/react'
 
 export const AppSidebarNav = ({ items }) => {
+  const location = useLocation()
+
+  const normalize = (p) => (p || '').replace(/\/+$/, '') || '/'
+
+  const isPathActive = (to, pathname) => {
+    if (!to) return false
+    const a = normalize(to)
+    const b = normalize(pathname)
+    if (a === '/') return b === '/'
+    return b === a || b.startsWith(`${a}/`)
+  }
+
+  const hasActiveChild = (children, pathname) => {
+    if (!Array.isArray(children)) return false
+    return children.some((child) => {
+      if (child?.items) return hasActiveChild(child.items, pathname)
+      return isPathActive(child?.to, pathname)
+    })
+  }
+
   const navLink = (name, icon, badge, indent = false) => {
     return (
       <>
@@ -51,8 +71,16 @@ export const AppSidebarNav = ({ items }) => {
   const navGroup = (item, index) => {
     const { component, name, icon, items, to, ...rest } = item
     const Component = component
+    const active = isPathActive(to, location.pathname) || hasActiveChild(items, location.pathname)
     return (
-      <Component compact as="div" key={index} toggler={navLink(name, icon)} {...rest}>
+      <Component
+        compact
+        as="div"
+        key={index}
+        toggler={navLink(name, icon)}
+        visible={active}
+        {...rest}
+      >
         {items?.map((item, index) =>
           item.items ? navGroup(item, index) : navItem(item, index, true),
         )}

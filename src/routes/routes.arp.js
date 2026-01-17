@@ -19,6 +19,24 @@ const CIAComputationConfiguration = React.lazy(() => import('../views/setup/CIAC
 const AssessmentSetupConfiguration= React.lazy(() => import('../views/setup/AssessmentSetupConfiguration'))
 const UploadPhotoConfiguration= React.lazy(() => import('../views/setup/UploadPhotoConfiguration'))
 
+// ===== Phase 2 : Accreditation ===== 
+const AddManual = React.lazy(() => import('../views/accreditation/AddManual'))
+const AddDataLabel = React.lazy(() => import('../views/accreditation/AddDataLabel'))
+const ExtendedProfile = React.lazy(() => import('../views/accreditation/ExtendedProfile'))
+const AddEpMetrics = React.lazy(() => import('../views/accreditation/AddEpMetrics'))
+const CriteriaSetup = React.lazy(() => import('../views/accreditation/CriteriaSetup'))
+const KeyIndicatorSetup = React.lazy(() => import('../views/accreditation/KeyIndicatorSetup'))
+const MetricSetup = React.lazy(() => import('../views/accreditation/MetricSetup'))
+const SubMetricSetup = React.lazy(() => import('../views/accreditation/SubMetricSetup'))
+const QualitativeSetup = React.lazy(() => import('../views/accreditation/QualitativeSetup'))
+const QuantitativeSetup = React.lazy(() => import('../views/accreditation/QuantitativeSetup'))
+const GradeSetup = React.lazy(() => import('../views/accreditation/GradeSetup'))
+const DocumentsSetup = React.lazy(() => import('../views/accreditation/DocumentsSetup'))
+const ExpertPanelSetup = React.lazy(() => import('../views/accreditation/ExpertPanelSetup'))
+
+
+
+
 // Learning Management System (LMS) components can be added here similarly
 const CourseAllotment = React.lazy(() => import('../views/lms/CourseAllotment'))
 const StudentAllotment = React.lazy(() => import('../views/lms/StudentAllotment'))
@@ -53,6 +71,14 @@ const ObeMarkEntry = React.lazy(() => import('../views/obe/ObeMarkEntry'))
 const ObeAttainment = React.lazy(() => import('../views/obe/ObeAttainment'))
 const AttainmentReport = React.lazy(() => import('../views/obe/AttainmentReport'))
 const ArticulationMatrix = React.lazy(() => import('../views/obe/ArticulationMatrix'))
+
+// Examination components can be added here similarly
+const QuestionBank = React.lazy(() => import('../views/examination/QuestionBank'))
+const QuestionPaper = React.lazy(() => import('../views/examination/QuestionPaper'))
+const ScheduleExamination = React.lazy(() => import('../views/examination/ScheduleExamination'))
+const OnlineExamination = React.lazy(() => import('../views/examination/OnlineExamination'))
+const MarkEntry = React.lazy(() => import('../views/examination/MarkEntry'))
+const ResultAnalysis = React.lazy(() => import('../views/examination/ResultAnalysis'))
 
 const Page = (name) => () => <div className="p-4">{name}</div>
 
@@ -96,35 +122,21 @@ const routes = [
   { path: '/setup/upload-photo', name: 'Upload Photo', element: UploadPhotoConfiguration },
 
   // ===== Phase 2 : Accreditation =====
-  { path: '/accreditation/add-manual', name: 'Add Manual', element: Page('Add Manual') },
-  {
-    path: '/accreditation/add-data-labels',
-    name: 'Add Data Labels',
-    element: Page('Add Data Labels'),
-  },
-  {
-    path: '/accreditation/extended-profile',
-    name: 'Extended Profile',
-    element: Page('Extended Profile'),
-  },
-  {
-    path: '/accreditation/add-ep-metrics',
-    name: 'Add EP Metrics',
-    element: Page('Add EP Metrics'),
-  },
-  { path: '/accreditation/criteria', name: 'Criteria', element: Page('Criteria') },
-  {
-    path: '/accreditation/key-indicators',
-    name: 'Key Indicators',
-    element: Page('Key Indicators'),
-  },
-  { path: '/accreditation/main-metrics', name: 'Main Metrics', element: Page('Main Metrics') },
-  { path: '/accreditation/sub-metrics', name: 'Sub Metrics', element: Page('Sub Metrics') },
-  { path: '/accreditation/qualitative', name: 'Qualitative', element: Page('Qualitative') },
-  { path: '/accreditation/quantitative', name: 'Quantitative', element: Page('Quantitative') },
-  { path: '/accreditation/grade', name: 'Grade', element: Page('Grade') },
-  { path: '/accreditation/documents', name: 'Documents', element: Page('Documents') },
-  { path: '/accreditation/expert-panel', name: 'Expert Panel', element: Page('Expert Panel') },
+  { path: '/accreditation/add-manual', name: 'Add Manual', element: AddManual },
+  { path: '/accreditation/add-data-labels', name: 'Add Data Labels', element: AddDataLabel },
+  { path: '/accreditation/extended-profile', name: 'Extended Profile', element: ExtendedProfile },
+  { path: '/accreditation/add-ep-metrics', name: 'Add EP Metrics', element: AddEpMetrics },
+  { path: '/accreditation/criteria', name: 'Criteria', element: CriteriaSetup },
+  { path: '/accreditation/key-indicators', name: 'Key Indicators', element: KeyIndicatorSetup },
+  { path: '/accreditation/main-metrics', name: 'Main Metrics', element: MetricSetup },
+  { path: '/accreditation/sub-metrics', name: 'Sub Metrics', element: SubMetricSetup },
+  { path: '/accreditation/qualitative', name: 'Qualitative', element: QualitativeSetup },
+  { path: '/accreditation/quantitative', name: 'Quantitative', element: QuantitativeSetup },
+  { path: '/accreditation/grade', name: 'Grade', element: GradeSetup },
+  { path: '/accreditation/documents', name: 'Documents', element: DocumentsSetup },
+  { path: '/accreditation/expert-panel', name: 'Expert Panel', element: ExpertPanelSetup },
+
+  
 
   // ===== Phase 3 : Learning Management System =====
   { path: '/lms/course-allotment', name: 'Course Allotment', element: CourseAllotment },
@@ -166,29 +178,15 @@ const routes = [
   { path: '/obe/attainment-reports', name: 'Attainment Reports', element: AttainmentReport },
   { path: '/obe/articulation-matrix', name: 'Articulation Matrix', element: ArticulationMatrix },
 
-  
- 
-  
   // ===== Phase 6 : Internal Assessment =====
-  { path: '/evaluation/question-bank', name: 'Question Bank', element: Page('Question Bank') },
-  { path: '/evaluation/question-paper', name: 'Question Paper', element: Page('Question Paper') },
-  {
-    path: '/evaluation/schedule-examination',
-    name: 'Schedule Examination',
-    element: Page('Schedule Examination'),
-  },
-  {
-    path: '/evaluation/online-examination',
-    name: 'Online Examination',
-    element: Page('Online Examination'),
-  },
-  { path: '/evaluation/mark-entry', name: 'Mark Entry', element: Page('Mark Entry') },
-  {
-    path: '/evaluation/result-analysis',
-    name: 'Result Analysis',
-    element: Page('Result Analysis'),
-  },
-
+  { path: '/evaluation/question-bank', name: 'Question Bank', element: QuestionBank },
+  { path: '/evaluation/question-paper', name: 'Question Paper', element: QuestionPaper },
+  { path: '/evaluation/schedule-examination', name: 'Schedule Examination', element: ScheduleExamination },
+  { path: '/evaluation/online-examination', name: 'Online Examination', element: OnlineExamination },
+  { path: '/evaluation/mark-entry', name: 'Mark Entry', element: MarkEntry },
+  { path: '/evaluation/result-analysis', name: 'Result Analysis', element: ResultAnalysis },
+  
+   
   // ===== Phase 7 : Research & Innovation =====
   {
     path: '/research/activities',

@@ -47,7 +47,7 @@ const nav = [
   // SETUP CONFIGURATION NAV GROUP MENU ITEMS
   {
     component: CNavGroup,
-    name: 'Setup',
+    name: 'Configuration',
     to: '/setup',
     icon: icon(cilSettings),
     items: [
@@ -173,7 +173,7 @@ const nav = [
  
   {
     component: CNavGroup,
-    name: 'Evaluation',
+    name: 'Examination',
     to: '/evaluation',
     icon: icon(cilSpreadsheet),
     items: [
@@ -296,7 +296,7 @@ const nav = [
   { component: CNavTitle, name: 'Admin' },
   {
     component: CNavGroup,
-    name: 'Governance',
+    name: 'Admin',
     to: '/governance',
     icon: icon(cilBalanceScale),
     items: [

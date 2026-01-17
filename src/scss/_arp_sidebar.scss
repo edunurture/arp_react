@@ -1,146 +1,91 @@
 /* =====================================================
-   ARP Sidebar Theme – WHITE Background (Enterprise)
+   ARP Sidebar – CoreUI Modern (Dark) compatible
+   - Uses CoreUI sidebar CSS variables where possible
+   - Keeps ARP layout fixes (narrow width, no clipping)
+   - Forces normal (unbold) typography
    ===================================================== */
 
-/* ---------- Base Sidebar (WHITE) ---------- */
 .sidebar {
-  background-color: #ffffff !important;
-  color: #1F2933;
-  border-right: 1px solid #E5E7EB;
-
-  /* CoreUI width variables (important for docked mode) */
+  /* Modern-like dimensions */
   --cui-sidebar-width: 256px;
-  --cui-sidebar-narrow-width: 76px; /* increase to avoid icon clipping */
+  --cui-sidebar-narrow-width: 64px;
+
+  /* Dark base (close to Modern demo feel) */
+  --cui-sidebar-bg: #1f242d;
+  --cui-sidebar-color: rgba(255, 255, 255, 0.86);
+
+  /* Nav sizing / rhythm */
+  --cui-sidebar-nav-link-padding-y: 0.55rem;
+  --cui-sidebar-nav-link-padding-x: 0.85rem;
+  --cui-sidebar-nav-link-border-radius: 0.65rem;
+
+  /* Hover / active (Modern-style subtle contrasts) */
+  --cui-sidebar-nav-link-hover-bg: rgba(255, 255, 255, 0.08);
+  --cui-sidebar-nav-link-hover-color: rgba(255, 255, 255, 0.95);
+  --cui-sidebar-nav-link-active-bg: rgba(255, 255, 255, 0.12);
+  --cui-sidebar-nav-link-active-color: rgba(255, 255, 255, 0.98);
 }
 
-/* Brand area (keep dark for logo contrast) */
-.sidebar .sidebar-brand {
-  background-color: #0C1013;
+/* Typography: keep sidebar text UNBOLD */
+.sidebar .sidebar-nav .nav-link,
+.sidebar .sidebar-nav .nav-group-toggle,
+.sidebar .sidebar-nav .nav-title {
+  font-weight: 400 !important;
 }
 
-/* Sidebar header area */
-.sidebar .sidebar-header {
-  background-color: #ffffff !important;
+/* If Bootstrap/CoreUI utility classes are used in nav, neutralize inside sidebar */
+.sidebar .sidebar-nav .fw-bold,
+.sidebar .sidebar-nav .fw-semibold,
+.sidebar .sidebar-nav .fw-medium {
+  font-weight: 400 !important;
 }
 
-/* Section titles */
-.sidebar .nav-title {
-  color: #6B7280;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+/* Icons should inherit the same color as text */
+.sidebar .nav-link .nav-icon,
+.sidebar .nav-group-toggle .nav-icon {
+  color: inherit;
 }
 
-/* ---------- Nav links (default) ---------- */
-.sidebar .nav-link {
-  color: #1F2933;
-  border-radius: 10px;
-  margin: 2px 10px;
+/* Sidebar header + borders blend into dark */
+.sidebar .sidebar-header,
+.sidebar .sidebar-footer {
+  background-color: transparent;
 }
 
-.sidebar .nav-link .nav-icon {
-  color: #4B5563;
+.sidebar.border-end {
+  border-right-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Hover */
-.sidebar .nav-link:hover {
-  background-color: #1F4B99;
-  color: #ffffff;
+/* Search box in dark */
+.sidebar .arp-sidebar-search {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-.sidebar .nav-link:hover .nav-icon {
-  color: #ffffff;
-}
-
-/* Active */
-.sidebar .nav-link.active,
-.sidebar .nav-group.show > .nav-link {
-  background-color: #243040;
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.sidebar .nav-link.active .nav-icon {
-  color: #ffffff;
-}
-
-/* Home always blue */
-.sidebar .nav-link[href="/dashboard"],
-.sidebar .nav-link[href="/"] {
-  background-color: #1F4B99 !important;
-  color: #ffffff !important;
-  font-weight: 600;
-}
-
-.sidebar .nav-link[href="/dashboard"] .nav-icon,
-.sidebar .nav-link[href="/"] .nav-icon {
-  color: #ffffff !important;
-}
-
-/* Sub-menu indentation (expanded mode) */
-.sidebar .nav-group-items .nav-link {
-  margin-left: 18px;
-  border-left: 2px solid #E5E7EB;
-  border-radius: 8px;
-}
-
-.sidebar .nav-group-items .nav-link.active {
-  border-left-color: #1F4B99;
-}
-
-/* =====================================================
-   Sidebar Search Box – PURE WHITE (Final Override)
-   ===================================================== */
-
-.sidebar .arp-sidebar-search .input-group {
-  background-color: #ffffff !important;
-  border-radius: 10px;
-}
-
-.sidebar .arp-sidebar-search .input-group-text {
-  background-color: #ffffff !important;
-  border: 1px solid #E5E7EB !important;
-  border-right: none !important;
-  color: #1F2933 !important;
-}
-
+.sidebar .arp-sidebar-search .input-group-text,
 .sidebar .arp-sidebar-search .form-control {
-  background-color: #ffffff !important;
-  border: 1px solid #E5E7EB !important;
-  border-left: none !important;
-  color: #1F2933 !important;
-  box-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
 }
 
 .sidebar .arp-sidebar-search .form-control::placeholder {
-  color: #9CA3AF !important;
+  color: rgba(255, 255, 255, 0.55) !important;
 }
 
-.sidebar .arp-sidebar-search .input-group-text svg {
-  color: #4B5563 !important;
-}
-
-.sidebar .arp-sidebar-search .form-control:focus {
-  box-shadow: none !important;
-  border-color: #1F4B99 !important;
-}
-
-/* Toggler */
-.sidebar .sidebar-toggler {
-  background-color: #F3F4F6;
+/* Make PNG logo appear white-ish in dark sidebar */
+.sidebar .arp-sidebar-logo {
+  filter: brightness(0) invert(1);
 }
 
 /* =====================================================
    DOCKED / NARROW MODE (Icons-only) — NO CLIPPING
    ===================================================== */
 
-/* Ensure narrow width applies */
 .sidebar.sidebar-narrow,
 .sidebar.sidebar-narrow-unfoldable {
   width: var(--cui-sidebar-narrow-width) !important;
 }
 
-/* Prevent internal clipping that causes partial icons */
 .sidebar.sidebar-narrow .sidebar-nav,
 .sidebar.sidebar-narrow-unfoldable .sidebar-nav,
 .sidebar.sidebar-narrow .nav,
@@ -148,7 +93,6 @@
   overflow: visible !important;
 }
 
-/* Center items, reduce horizontal squeeze */
 .sidebar.sidebar-narrow .nav-link,
 .sidebar.sidebar-narrow-unfoldable .nav-link {
   margin: 4px 8px !important;
@@ -156,14 +100,12 @@
   justify-content: center !important;
 }
 
-/* Icon: keep fully visible */
 .sidebar.sidebar-narrow .nav-icon,
 .sidebar.sidebar-narrow-unfoldable .nav-icon {
   margin: 0 !important;
   min-width: 22px !important;
 }
 
-/* Hide nav labels + submenus fully in docked mode */
 .sidebar.sidebar-narrow .nav-link span,
 .sidebar.sidebar-narrow-unfoldable .nav-link span,
 .sidebar.sidebar-narrow .nav-group-items,
@@ -171,15 +113,14 @@
   display: none !important;
 }
 
-/* Docked logo safe size */
-.sidebar.sidebar-narrow .sidebar-header img,
-.sidebar.sidebar-narrow-unfoldable .sidebar-header img {
-  max-width: 32px !important;
-  max-height: 32px !important;
-}
-
-/* Optional: tighten search area in docked mode (keeps clean look) */
 .sidebar.sidebar-narrow .arp-sidebar-search,
 .sidebar.sidebar-narrow-unfoldable .arp-sidebar-search {
   display: none !important;
 }
+
+/* === Sidebar font family override === */
+.sidebar,
+.sidebar * {
+  font-family: "Segoe UI", system-ui   !important;
+}
+

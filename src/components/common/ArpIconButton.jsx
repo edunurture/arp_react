@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CIcon from '@coreui/icons-react'
 import {
+  cilPlus,
   cilMagnifyingGlass,
   cilPencil,
   cilTrash,
   cilCloudDownload,
   cilCloudUpload,
   cilPrint,
+  cilChartLine,
 } from '@coreui/icons'
 
 const BS_COLORS = new Set([
@@ -27,12 +29,15 @@ const FALLBACK_BG = {
 
 // ✅ ARP Table Action Icons (CoreUI)
 const ARP_TABLE_ICON = {
+  add: cilPlus,
   view: cilMagnifyingGlass,
   edit: cilPencil,
   delete: cilTrash,
   download: cilCloudDownload,
   upload: cilCloudUpload,
   print: cilPrint,
+  chart: cilChartLine,
+  cilChartLine,
 }
 
 export default function ArpIconButton({
@@ -83,7 +88,16 @@ export default function ArpIconButton({
 }
 
 ArpIconButton.propTypes = {
-  icon: PropTypes.oneOf(['view', 'edit', 'delete', 'download', 'upload', 'print']).isRequired,
+  icon: PropTypes.oneOf([
+    'add',
+    'view',
+    'edit',
+    'delete',
+    'download',
+    'upload',
+    'print',
+    'chart',
+  ]).isRequired,
   color: PropTypes.string,
   size: PropTypes.number,
   onClick: PropTypes.func,
